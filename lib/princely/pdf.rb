@@ -72,7 +72,7 @@ module Princely
         pdf.close_write
         result = pdf.gets(nil)
         pdf.close_read
-        result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
+        # result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
 
         result
       end
@@ -101,7 +101,8 @@ module Princely
       # Don't spew errors to the standard out...and set up to take IO
       # as input and output
       path << " --media=#{media}" if media
-      path << " --silent - -o #{output_file}"
+      path << " - -o #{output_file}"
+      # path << " --silent - -o #{output_file}"
       path << " >> '#{log_file}' 2>> '#{log_file}'" if options[:output_to_log_file]
 
       log_command path if options[:log_command]
